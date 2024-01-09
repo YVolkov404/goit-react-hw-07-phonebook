@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { getSearchQuery, filterState } from 'rdx/filterSlice';
+import { getSearchQuery } from 'rdx/filterSlice';
+import { selectFilterState } from 'rdx/selectors';
 //---------------------------------------------------------------------
 import { Search, Label, Input } from './Filter.styled';
 //---------------------------------------------------------------------
 export const Filter = () => {
-  const filter = useSelector(filterState);
+  const filter = useSelector(selectFilterState);
   const dispatch = useDispatch();
 
   const onChangeHandler = e => dispatch(getSearchQuery(e.target.value));

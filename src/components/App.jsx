@@ -4,19 +4,21 @@ import { Filter } from './Filter/Filter';
 import { Loader } from './Loader/Loader';
 //--------------------------------------------------------------------
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'rdx/contactsSlice';
+import { selectContacts, selectErrors, selectIsLoading } from 'rdx/selectors';
 import { useEffect } from 'react';
-import { fetchContacts } from 'services/operations';
+import { getAllContacts } from 'services/operations';
 //--------------------------------------------------------------------
 import { Container, Title, SubTitle } from './App.styled';
 // -------------------------------------------------------------------
 export const App = () => {
   const dispatch = useDispatch();
 
-  const { contacts, isLoading, error } = useSelector(selectContacts);
+  const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectErrors);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(getAllContacts());
   }, [dispatch]);
 
   return (
@@ -26,8 +28,8 @@ export const App = () => {
       <ContactForm />
       <SubTitle>Contacts</SubTitle>
       <Filter />
-      <ContactList />
-      {/* {contacts.length > 0 && <ContactList />} */}
+      {/* <ContactList /> */}
+      {contacts.length > 0 && <ContactList />}
       {error && null}
     </Container>
   );

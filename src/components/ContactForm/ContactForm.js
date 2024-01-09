@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { addContacts, selectContacts } from 'rdx/contactsSlice';
+import { selectContacts } from 'rdx/selectors';
+import { addContact } from 'services/operations';
 import { Formik, useFormik } from 'formik';
 //-------------------------------------------------------------
 import {
@@ -43,7 +44,7 @@ export const ContactForm = () => {
     );
     return hasContactName
       ? alert(`${values.name} already in phonebook!`)
-      : dispatch(addContacts(values.name, values.number));
+      : dispatch(addContact(values.name, values.number));
   };
 
   const formik = useFormik({
@@ -52,7 +53,7 @@ export const ContactForm = () => {
       number: '',
     },
     validate,
-    onSubmit: (values, actions) => {
+    onSubmit: async (values, actions) => {
       actions.resetForm();
       submitHandler(values);
     },

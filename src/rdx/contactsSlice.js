@@ -48,6 +48,7 @@ export const contactsSlice = createSlice({
       .addCase(getAllContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.contacts = action.payload;
+        console.log(state.contacts);
         state.error = null;
       })
       .addCase(getAllContacts.rejected, handleRejected)
@@ -70,8 +71,5 @@ export const contactsSlice = createSlice({
 });
 //--------------------------------------------------------------------------
 // export const { addContacts, deleteContacts } = contactsSlice.actions;
-export const contactsReducer = contactsSlice.reducer;
 
-export const selectIsLoading = state => state.contacts;
-export const selectContacts = state => state.contacts;
-export const selectErrors = state => state.contacts;
+export const contactsReducer = contactsSlice.reducer;
