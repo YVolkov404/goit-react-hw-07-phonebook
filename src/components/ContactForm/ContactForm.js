@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectContacts } from 'rdx/selectors';
 import { addContact } from 'services/operations';
 import { Formik, useFormik } from 'formik';
+import { contactName } from 'rdx/selectors';
 //-------------------------------------------------------------
 import {
   Form,
@@ -36,15 +36,18 @@ const validate = values => {
 //-------------------------------------------------------------
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
+  const hasContactName = useSelector(contactName);
 
-  const submitHandler = values => {
-    const hasContactName = contacts.some(
-      contact => contact.name.toLowerCase() === values.name.toLowerCase()
-    );
-    return hasContactName
-      ? alert(`${values.name} already in phonebook!`)
-      : dispatch(addContact(values.name, values.number));
+  console.log(hasContactName);
+
+  const submitHandler = async values => {
+    const { name, number } = values;
+
+    try {
+      hasContactName === name
+        ? alert(`${name} already in phonebook!`)
+        : dispatch(addContact({ name, number }));
+    } catch (error) {}
   };
 
   const formik = useFormik({
@@ -53,7 +56,7 @@ export const ContactForm = () => {
       number: '',
     },
     validate,
-    onSubmit: async (values, actions) => {
+    onSubmit: (values, actions) => {
       actions.resetForm();
       submitHandler(values);
     },

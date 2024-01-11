@@ -23,14 +23,14 @@ export const App = () => {
 
   return (
     <Container>
-      {isLoading && Loader}
+      {isLoading && !error && Loader}
+      {/* {error && undefined} */}
       <Title>Phonebook</Title>
       <ContactForm />
       <SubTitle>Contacts</SubTitle>
       <Filter />
-      {/* <ContactList /> */}
+      <ContactList />
       {contacts.length > 0 && <ContactList />}
-      {error && null}
     </Container>
   );
 };

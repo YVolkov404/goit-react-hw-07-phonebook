@@ -1,14 +1,17 @@
 import { createSelector } from '@reduxjs/toolkit';
-
-export const selectIsLoading = state => state.contacts;
-export const selectContacts = state => state.contacts;
-export const selectErrors = state => state.contacts;
+export const selectIsLoading = state => state.contacts.contacts;
+export const selectContacts = state => state.contacts.contacts;
+export const selectErrors = state => state.contacts.contacts;
 export const selectFilterState = state => state.filter.filter;
 
-console.log(selectContacts);
+export const filteredContacts = createSelector(
+  [selectContacts, selectFilterState],
+  (contacts, filter) =>
+    contacts.filter(contact =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    )
+);
 
-export const filteredContacts = createSelector(() => {
-  return selectContacts.filter(contact =>
-    contact.name.toLowerCase().includes(selectFilterState.toLowerCase())
-  );
-});
+export const contactName = createSelector([selectContacts], contacts =>
+  contacts.some(contact => contact.name.toLowerCase())
+);

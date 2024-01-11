@@ -4,8 +4,7 @@ import { App } from './components/App';
 import { GlobalStyle } from './components/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from 'rdx/store';
+import { store } from 'rdx/store';
 
 /** Theme : color guide
   ---> main color : background;
@@ -25,9 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
-        <PersistGate loading={null} persistor={persistor}>
-          <App />
-        </PersistGate>
+        <App />
       </ThemeProvider>
       <GlobalStyle />
     </Provider>
