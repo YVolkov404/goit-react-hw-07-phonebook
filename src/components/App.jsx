@@ -29,7 +29,6 @@ export const App = () => {
       <ContactForm />
       <SubTitle>Contacts</SubTitle>
       <Filter />
-      <ContactList />
       {contacts.length > 0 && <ContactList />}
     </Container>
   );

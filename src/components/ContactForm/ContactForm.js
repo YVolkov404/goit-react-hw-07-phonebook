@@ -38,12 +38,9 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
   const hasContactName = useSelector(contactName);
 
-  console.log(hasContactName);
-
   const submitHandler = async values => {
-    const { name, number } = values;
-
     try {
+      const { name, number } = values;
       hasContactName === name
         ? alert(`${name} already in phonebook!`)
         : dispatch(addContact({ name, number }));
