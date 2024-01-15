@@ -1,18 +1,18 @@
-import { LineWave } from 'react-loader-spinner';
+import { Blocks } from 'react-loader-spinner';
 
 export const Loader = () => {
   return (
-    <LineWave
-      visible={true}
-      height="100"
-      width="100"
+    <Blocks
+      height="50"
+      width="50"
       color="#4fa94d"
-      ariaLabel="line-wave-loading"
-      wrapperStyle={{}}
-      wrapperClass=""
-      firstLineColor=""
-      middleLineColor=""
-      lastLineColor=""
+      ariaLabel="blocks-loading"
+      wrapperStyle={{
+        position: 'absolute',
+        left: '80px',
+      }}
+      wrapperClass="blocks-wrapper"
+      // visible={true}
     />
   );
 };

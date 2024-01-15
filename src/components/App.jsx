@@ -23,8 +23,7 @@ export const App = () => {
 
   return (
     <Container>
-      {isLoading && !error && Loader}
-      {/* {error && undefined} */}
+      {isLoading && !error && <Loader />}
       <Title>Phonebook</Title>
       <ContactForm />
       <SubTitle>Contacts</SubTitle>

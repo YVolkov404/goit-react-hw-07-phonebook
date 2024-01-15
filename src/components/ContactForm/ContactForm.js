@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from 'services/operations';
 import { Formik, useFormik } from 'formik';
-import { contactName } from 'rdx/selectors';
+import { selectContacts } from 'rdx/selectors';
 //-------------------------------------------------------------
 import {
   Form,
@@ -12,6 +12,12 @@ import {
   SubmitBtn,
 } from './ContactForm.styled';
 //--------------------------------------------------------------
+
+/**
+ * Минулого разу робив валідацію за допомоги Yup --->
+ * цього разу вирішив зробити на чистому Formik(у) заради досвіду
+ */
+
 const validate = values => {
   const errors = {};
 
@@ -36,12 +42,16 @@ const validate = values => {
 //-------------------------------------------------------------
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const hasContactName = useSelector(contactName);
+  const contacts = useSelector(selectContacts);
 
   const submitHandler = async values => {
     try {
       const { name, number } = values;
-      hasContactName === name
+      const hasContactName = contacts.some(
+        contact => contact.name.toLowerCase() === name.toLowerCase()
+      );
+
+      hasContactName
         ? alert(`${name} already in phonebook!`)
         : dispatch(addContact({ name, number }));
     } catch (error) {}
