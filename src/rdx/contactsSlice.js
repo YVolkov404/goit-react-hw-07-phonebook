@@ -39,7 +39,7 @@ export const contactsSlice = createSlice({
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;
         const contactID = state.contacts.filter(
-          contact => contact.id === action.payload
+          contact => contact.id === action.payload.id
         );
         state.contacts.splice(contactID, 1);
         state.error = null;
